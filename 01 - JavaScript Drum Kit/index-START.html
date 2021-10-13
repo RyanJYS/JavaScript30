@@ -58,7 +58,32 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  
+  function handleKeydown(e) {
+    let pressedKey = e.which;
+    const key = document.querySelector(`div[data-key="${pressedKey}"]`);
+    const audio = document.querySelector(`audio[data-key="${pressedKey}"]`);
+    //其他按键，退出函数
+    if(!key){
+      return;
+    }
+    key.classList.add('playing');
+    key.addEventListener('transitionend', handleTransitionend);
+    //连续点击某一按键的时候，只有第一次点击会响，所以要在每一次点击之前重置音效
+    audio.currentTime = 0;
+    audio.play();
+    
+  }
 
+  function handleTransitionend(e) {
+    if(e.propertyName!='transform') {
+      return;
+    }
+    e.target.classList.remove('playing');
+  }
+  
+  window.addEventListener('keydown', handleKeydown);
+  
 </script>
 
 
