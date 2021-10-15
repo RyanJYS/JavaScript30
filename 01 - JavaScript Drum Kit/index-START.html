@@ -60,7 +60,8 @@
 <script>
   
   function handleKeydown(e) {
-    let pressedKey = e.which;
+    console.log('keycode',e.keyCode);
+    let pressedKey = e.keyCode;
     const key = document.querySelector(`div[data-key="${pressedKey}"]`);
     const audio = document.querySelector(`audio[data-key="${pressedKey}"]`);
     //其他按键，退出函数
