@@ -37,29 +37,61 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    console.table(inventors.filter(item => item.year >=1500 && item.year <1600));
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    console.table(inventors.map(item => ({firstName: item.first, lastName: item.last})));
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    console.table(inventors.sort( (a,b) => a.year-b.year ));
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    function reducer(prev, cur) {
+      return prev + cur.passed - cur.year;
+    }
+    console.log(inventors.reduce(reducer,0));
 
     // 5. Sort the inventors by years lived
+    console.table(inventors.sort( (a,b) => (a.passed-a.year)-(b.passed-b.year) ));
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // const nodeList = document.querySelector(".mw-category");
+    // let result = [];
+    // console.log('6');
+    // const nameList = nodeList.querySelectorAll("a");
+    // nameList.forEach(item => {
+    //   if(item.innerText.includes('de')) {
+    //     result.push(item.innerText)
+    //   } 
+    // });
+    // console.table(result);
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    people.sort( (a,b) => a.split(", ")[1].localeCompare(b.split(", ")[1]) );
+    console.log("7");
+    console.table(people);
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    console.log( data.reduce( function reducer (prev, cur) {
+      if(cur in prev) {
+        prev[cur] ++;
+        return prev;
+      }
+      else {
+        prev[cur] = 1;
+        return prev;
+      }
+    }, {}) );
   </script>
 </body>
 </html>
